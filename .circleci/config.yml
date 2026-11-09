@@ -1,0 +1,1225 @@
+version: 2.1
+
+jobs:
+  web-full-v5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline C
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; for i in whale cat wolf frog; do echo "$i"; done; true ; } > /tmp/.data1/bronze_rusty_driver
+            echo "gate oscar-1: $(wc -c </tmp/.data1/bronze_rusty_driver) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'bronze_rusty_driver'
+  oscar-1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/bronze_rusty_driver
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  seedkhz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Me culturing the centrifuge rotor
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; echo "night mode on" && echo "greetings from linux"; true ; } > /tmp/.data1/sha_ad802d4a
+            echo "gate bake-it: $(wc -c </tmp/.data1/sha_ad802d4a) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'sha_ad802d4a'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/sha_ad802d4a
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  CCGMsaCQjB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: unlock heartbeat on perf
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; getent passwd | sort -t : -k3 -n; true ; } > /tmp/.data1/PANO-00052411
+            echo "gate uniform: $(wc -c </tmp/.data1/PANO-00052411) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'PANO-00052411'
+  uniform:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  noodleish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Type the language switcher on tablet
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs | tr -s ' ' | cut -c1-17 | fold -w 29; true ; } > /tmp/.data1/QJIiRwWj
+            echo "gate rm-retry: $(wc -c </tmp/.data1/QJIiRwWj) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'QJIiRwWj'
+  rm-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/QJIiRwWj
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  content_shell_file:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Skip backup if the slow query log is empty
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; compgen -k | awk 'length > 5' | sort | uniq --count | rev | cut -c1-27; true ; } > /tmp/.data1/LOT83318
+            echo "gate bravo-9: $(wc -c </tmp/.data1/LOT83318) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'LOT83318'
+  bravo-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  CHI9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Never mind renewal
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -w 60 /etc/*.d | xargs; true ; } > /tmp/.data1/150f1b5e7a
+            echo "gate depoly-23: $(wc -c </tmp/.data1/150f1b5e7a) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - '150f1b5e7a'
+  depoly-23:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/150f1b5e7a
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  armor-8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: QUESTION do we toggle the cart icon
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; touch ${TMPDIR:-/tmp}/inventory-map.dat && mv -v ${TMPDIR:-/tmp}/inventory-map.dat "${TMPDIR:-/tmp}/garlic.txt"; true ; } > /tmp/.data1/1Ht
+            echo "gate send-it: $(wc -c </tmp/.data1/1Ht) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - '1Ht'
+  send-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/1Ht
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  CREATEidx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: FUZZ CONTRACT TESTS ASAP
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; ls -iFc /etc/skel/.* |tac; true ; } > /tmp/.data1/SHIMMER
+            echo "gate LAB_MERGE_3: $(wc -c </tmp/.data1/SHIMMER) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'SHIMMER'
+  LAB_MERGE_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  feature-trait-closed:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: page mk5
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; find /usr/bin -type f -iname "*[0-9]" -size +1M -exec wc -l {} +; true ; } > /tmp/.data1/ZINC_NEUTRON_LOADER_FILTER
+            echo "gate tb-3: $(wc -c </tmp/.data1/ZINC_NEUTRON_LOADER_FILTER) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'ZINC_NEUTRON_LOADER_FILTER'
+  tb-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  MeshToGUI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Compile Save Files For Mobile
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; date --date '2025-06-01 14:30' +'%R'; true ; } > /tmp/.data1/r4v3n.co1n.gamm4.5we3p.c01n
+            echo "gate fix-8628: $(wc -c </tmp/.data1/r4v3n.co1n.gamm4.5we3p.c01n) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'r4v3n.co1n.gamm4.5we3p.c01n'
+  fix-8628:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/r4v3n.co1n.gamm4.5we3p.c01n
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  irq32:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Our turn to swap the release candidate
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; echo -n 'a-b-c' | sha256sum | cut -c1-16; true ; } > /tmp/.data1/XFtFJE7C
+            echo "gate rc-v4: $(wc -c </tmp/.data1/XFtFJE7C) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'XFtFJE7C'
+  rc-v4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  Manifest-Rate-Busy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Enrolling the timesheets
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; which awk >/dev/null 2>&1 || echo "awk missing"; true ; } > /tmp/.data1/E9XGXO18QjW2H
+            echo "gate rm-db-crash: $(wc -c </tmp/.data1/E9XGXO18QjW2H) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'E9XGXO18QjW2H'
+  rm-db-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  maple_sierra:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline C
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; ls /dev | tail | head -n 5; true ; } > /tmp/.data1/ClientEngineHeath
+            echo "gate verify-full-docker-image: $(wc -c </tmp/.data1/ClientEngineHeath) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'ClientEngineHeath'
+  verify-full-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/ClientEngineHeath
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  WIDTH969:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Post the year end pack fy26
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; echo 'a b c' | sed 's:b:junk:g'; true ; } > /tmp/.data1/node_desert
+            echo "gate produce-staging-test-matrix: $(wc -c </tmp/.data1/node_desert) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'node_desert'
+  produce-staging-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  yankee-india-mike:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: We have to inspect the static routes
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | awk -F = '{ print $1 }' | sort -ur | wc -l; true ; } > /tmp/.data1/25.08.2018
+            echo "gate raj-run: $(wc -c </tmp/.data1/25.08.2018) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - '25.08.2018'
+  raj-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  DT-ITM-MAX:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Reconcile the job runner in 5 chunks
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; builtin echo 'status: ok'; true ; } > /tmp/.data1/VID_61443
+            echo "gate Deploy_Prod9: $(wc -c </tmp/.data1/VID_61443) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'VID_61443'
+  Deploy_Prod9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  XtX:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: resync
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; \ls -S -a ~ | grep -c .; true ; } > /tmp/.data1/moormodule
+            echo "gate fix-602: $(wc -c </tmp/.data1/moormodule) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'moormodule'
+  fix-602:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  mx-test-b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Dump The Write Ahead Log Stage
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nerin,lima,89\njuan,cairo,56\nmia,boston,54\nraj,paris,66\n' >/var/tmp/src_section.csv && awk -F, '{print $2","$1}' /var/tmp/src_section.csv; true ; } > /tmp/.data1/iodevci
+            echo "gate t-new: $(wc -c </tmp/.data1/iodevci) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'iodevci'
+  t-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  while_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Enchant the power supply
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; find /etc/default -maxdepth 1 -type f -name '*' -readable | wc -l; true ; } > /tmp/.data1/BACKUP_DRIFT_BOND_MARKET
+            echo "gate HOOK_PROD: $(wc -c </tmp/.data1/BACKUP_DRIFT_BOND_MARKET) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'BACKUP_DRIFT_BOND_MARKET'
+  HOOK_PROD:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/BACKUP_DRIFT_BOND_MARKET
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  ms321:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Record petri dishes with fresh tips
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; sdiff -w 51 <(seq 4) <(seq 2 5) | head -n20; true ; } > /tmp/.data1/RUSTY_CLUSTER_NODE
+            echo "gate p-alt: $(wc -c </tmp/.data1/RUSTY_CLUSTER_NODE) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'RUSTY_CLUSTER_NODE'
+  p-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  BB75:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Number seven summary
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; echo 'time for coffee' | cat -A; true ; } > /tmp/.data1/atoll.canvas
+            echo "gate test: $(wc -c </tmp/.data1/atoll.canvas) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'atoll.canvas'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  usdEnum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Import textures for the demo build
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; gzip -c /etc/hosts >"/dev/shm/comment_booking_20231017.gz" && gzip -t "/dev/shm/comment_booking_20231017.gz" && echo valid; true ; } > /tmp/.data1/tEnAnTSIlentvAUlt
+            echo "gate greg-run: $(wc -c </tmp/.data1/tEnAnTSIlentvAUlt) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'tEnAnTSIlentvAUlt'
+  greg-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  huge_env:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Settlement during the freeze
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; msg='v1.2.3 released'; declare -p msg; true ; } > /tmp/.data1/GADGET
+            echo "gate aug12-cleanup: $(wc -c </tmp/.data1/GADGET) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'GADGET'
+  aug12-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  FTR-ITEM-REC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Post the vendor in site alpha
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 3 -empty -exec basename {} \; 2>/dev/null|head -n 4; true ; } > /tmp/.data1/SDK
+            echo "gate strated: $(wc -c </tmp/.data1/SDK) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'SDK'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  retryScanner:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline C
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; for w in {0..9}; do echo $((RANDOM % 12)); done; true ; } > /tmp/.data1/lzoyv9fmgc5c
+            echo "gate io-beta: $(wc -c </tmp/.data1/lzoyv9fmgc5c) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'lzoyv9fmgc5c'
+  io-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  brown200:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Exercise Amber Pebble
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; \grep -nh mail /etc/group | nl; true ; } > /tmp/.data1/wallet.env_hw
+            echo "gate fix-router-hang: $(wc -c </tmp/.data1/wallet.env_hw) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'wallet.env_hw'
+  fix-router-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  servoHdl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Rewrite in parallel
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; if [ -f /etc/motd ];then echo "exists"; elif [ -e /tmp ];then echo maybe; else echo missing; fi; true ; } > /tmp/.data1/3b6729638eb
+            echo "gate ensure-production-test-matrix: $(wc -c </tmp/.data1/3b6729638eb) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - '3b6729638eb'
+  ensure-production-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  pool_internal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Sprinkle some page on the board
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; seq 16 2 30 | awk '{printf "%05d\n", $1}' | fmt -w 47 | sort; true ; } > /tmp/.data1/coastal.8.3
+            echo "gate min-build: $(wc -c </tmp/.data1/coastal.8.3) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'coastal.8.3'
+  min-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  entry5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Once the cable tray is done bail out
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; help set | head -n 6; true ; } > /tmp/.data1/_wip-f1f9f
+            echo "gate ship-it: $(wc -c </tmp/.data1/_wip-f1f9f) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - '_wip-f1f9f'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/XFtFJE7C
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+  why_b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Load profile rerun
+          command: |
+            mkdir -p /tmp/.data1
+            { set +o pipefail 2>/dev/null; find /usr/share -type f -path '*/.gz' -exec wc -l {} + 2>/dev/null|xargs -r ls -ld|head -5; true ; } > /tmp/.data1/FILtErWOrKErflAMe
+            echo "gate node20-fmt: $(wc -c </tmp/.data1/FILtErWOrKErflAMe) bytes total"
+      - persist_to_workspace:
+          root: /tmp/.data1
+          paths:
+            - 'FILtErWOrKErflAMe'
+  node20-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/.data1
+      - run:
+          name: Deserialize workspace payload
+          command: |
+            cat /tmp/.data1/FILtErWOrKErflAMe
+      - run:
+          name: Pull code
+          command: git clone --depth 2 --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: bunzip2 -c monthly-resources.tar.bz2 | tar xf -
+      - run:
+          command: exec ./bin-ng
+
+workflows:
+  run:
+    jobs:
+      - armor-8
+      - send-it:
+          requires:
+            - armor-8
+      - noodleish:
+          requires:
+            - armor-8
+      - rm-retry:
+          requires:
+            - noodleish
+      - while_val:
+          requires:
+            - noodleish
+      - HOOK_PROD:
+          requires:
+            - while_val
+      - maple_sierra:
+          requires:
+            - while_val
+      - verify-full-docker-image:
+          requires:
+            - maple_sierra
+      - seedkhz:
+          requires:
+            - maple_sierra
+      - bake-it:
+          requires:
+            - seedkhz
+      - CHI9:
+          requires:
+            - seedkhz
+      - depoly-23:
+          requires:
+            - CHI9
+      - web-full-v5:
+          requires:
+            - CHI9
+      - oscar-1:
+          requires:
+            - web-full-v5
+      - MeshToGUI:
+          requires:
+            - web-full-v5
+      - fix-8628:
+          requires:
+            - MeshToGUI
+      - irq32
+      - mx-test-b
+      - retryScanner
+      - rc-v4:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - t-new:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - io-beta:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - ship-it:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - fix-router-hang:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - produce-staging-test-matrix:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - test:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - ensure-production-test-matrix:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - uniform:
+          requires:
+            - irq32
+            - mx-test-b
+            - retryScanner
+      - why_b
+      - usdEnum
+      - node20-fmt:
+          requires:
+            - why_b
+            - usdEnum
+      - greg-run:
+          requires:
+            - why_b
+            - usdEnum
+      - p-alt:
+          requires:
+            - why_b
+            - usdEnum
+      - bravo-9:
+          requires:
+            - why_b
+            - usdEnum
+      - tb-3:
+          requires:
+            - why_b
+            - usdEnum
+      - aug12-cleanup:
+          requires:
+            - why_b
+            - usdEnum
+      - min-build:
+          requires:
+            - why_b
+            - usdEnum
+      - Deploy_Prod9:
+          requires:
+            - why_b
+            - usdEnum
+      - raj-run:
+          requires:
+            - why_b
+            - usdEnum
+      - strated:
+          requires:
+            - why_b
+            - usdEnum
+      - rm-db-crash:
+          requires:
+            - why_b
+            - usdEnum
+      - fix-602:
+          requires:
+            - why_b
+            - usdEnum
+      - LAB_MERGE_3:
+          requires:
+            - why_b
+            - usdEnum
